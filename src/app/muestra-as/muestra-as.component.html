@@ -1,0 +1,73 @@
+<app-topbar-as [title]="'AutoSalud'"></app-topbar-as>
+<h2> 
+  <span *ngIf="!isDelete">Nueva</span>
+  Muestra 
+</h2>
+
+<!-- {{action | titlecase}} -->
+
+<div class="tests">
+  
+  <div class="container" *ngIf="!post; else forminfo" novalidate> 
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+
+      <mat-form-field class="form-element" appearance="fill">
+        <input matInput id="code" placeholder="Código de la muestra" formControlName="code" [readonly]="true">
+      </mat-form-field>
+
+      <mat-form-field class="form-element" appearance="fill">
+        <input matInput id="cardid" placeholder="Cédula del paciente" formControlName="cardid" type="tel" pattern="[0-9]{10}" [errorStateMatcher]="errorMatcher" [readonly]="true">
+
+        <mat-error *ngIf="formGroup.hasError('CardID')">
+          La cédula debe contener 10 dígitos
+        </mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field class="form-element" appearance="fill">
+        <input matInput id="reference" placeholder="Referencia" formControlName="reference" [readonly]="true">
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Resultado</mat-label>
+        <mat-select id="result" placeholder="Resultado" formControlName="result">
+          <mat-option value="-1">Sin Especificar</mat-option>
+          <mat-option value="0">Negativo</mat-option>
+          <mat-option value="1">Positivo</mat-option>
+          <mat-option value="2">No Concluyente</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="form-element">
+        <mat-label>Recomendaciones</mat-label>
+        <textarea matInput placeholder="Ingrese sus recomendaciones" id="suggestions" formControlName="suggestions"></textarea>
+      </mat-form-field>
+      
+      <div class="form-element buttons">
+        
+        <!-- [routerLink]="'/main'" -->
+        <button mat-raised-button type="reset" class="button" (click)="back()">CANCELAR</button>
+
+        <button mat-raised-button 
+        type="submit" 
+        id="save" 
+        class="button" 
+        [disabled]="!formGroup.valid" 
+        color="primary" 
+        (click)="save()">GUARDAR</button>
+
+        
+        <!--button mat-raised-button type="submit" id="delete" class="button" color="warn" *ngIf="isDelete" (click)="delete()">ELIMINAR</button-->
+
+      </div>
+
+    </form>
+  </div>
+
+  <ng-template #forminfo>
+    <div class="container">
+      {{ post | json }}
+    </div>
+  </ng-template>
+
+</div>

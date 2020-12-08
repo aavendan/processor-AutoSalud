@@ -1,0 +1,45 @@
+<!--app-menubar-as [title]="'AutoSalud'"></app-menubar-as-->
+
+<app-topbar-as [title]="'AutoSalud'"></app-topbar-as>
+
+<!-- class="custom-tabs" -->
+
+<mat-tab-group 
+#tabs
+class="custom-tabs"
+headerPosition="below" 
+animationDuration="0ms" 
+mat-align-tabs="center" 
+(selectedTabChange)="tabChanged($event)">
+
+  <!--mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon svgIcon="accept"></mat-icon>
+      <span class="downlabel">Recibir</span>
+    </ng-template>
+    
+    <div class="example-large-box">
+      <app-transfer-as></app-transfer-as>
+    </div>
+
+  </mat-tab-->
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon  svgIcon="process"></mat-icon>
+      <span class="downlabel">Procesar</span>
+    </ng-template>
+    
+    <div class="example-large-box">
+    <app-search-as
+    [showAdd]="false" 
+    [reloadTable]="reloadable.asObservable()">
+    </app-search-as>
+    </div>
+
+  </mat-tab>
+
+  
+
+
+</mat-tab-group>
